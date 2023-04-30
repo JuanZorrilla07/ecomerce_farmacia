@@ -1,0 +1,33 @@
+
+<div class="row prod-items prod-items-4">
+    {% for producuto in producutos %}
+    <article class="cf-sm-6 cf-md-4 cf-lg-4 col-xs-6 col-sm-6 col-md-4 col-lg-4 sectgl-item">
+      <div class="sectgl prod-i">
+        <div class="prod-i-top">
+          <a class="prod-i-img" href="{% url 'web:producuto' producuto.id %}">
+            {% if producuto.imagen %}
+              <img src="{{producuto.imagen.url}} " alt="">
+            {% else %}
+              <img src="" alt="imagen not found">
+            {% endif %}
+          </a>
+          <div class="prod-i-actions">
+            <div class="prod-i-actions-in">
+              <p class="prod-i-cart">
+                <a href="#" class="hover-label prod-addbtn"><i class="icon ion-android-cart"></i><span>Añadir al carrito</span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="prod-i-bot">
+          <div class="prod-i-info">
+            <p class="prod-i-price">${{producuto.precio}}</p>
+            <p class="prod-i-categ"><a href="#">{{producuto.Categoria}}</a></p>
+          </div>
+          <h3 class="prod-i-ttl"><a href="{% url 'web:producuto' producuto.id %}">{{producuto.nombre}}</a></h3>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  
