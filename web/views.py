@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 
 from .models import Categoria, Producuto
 
@@ -52,3 +52,40 @@ def producutoDetalle(request,producuto_id):
         'producuto':objProducuto
     }
     return render(request,'producto.html',context)
+
+
+"""vistas para el carrito de compras"""
+from .carrito import Cart
+
+def carrito(request):
+    return render(request, 'carrito.html')
+
+def agregarCarrito(request,producuto_id):
+    if request.method == 'POST':
+       cantidad = int(request.POST['cantidad'])
+    else:
+        cantidad = 1    
+
+    objProducuto = Producuto.objects.get(pk=producuto_id)
+    carritoProducuto = Cart(request)
+    carritoProducuto.add(objProducuto,cantidad)
+
+    if request.method == 'GET':
+        return redirect('/')
+
+    
+    return render(request,'carrito.html')
+    
+
+def eliminarProducutoCarrito(request,producuto_id):
+    objPorducuto = Producuto.objects.get(pk=producuto_id)
+    carritoProducuto = Cart(request)
+    carritoProducuto.delete(objPorducuto)
+
+    return render(request,'carrito.html')
+
+def limpiarCarrito(request):
+    carritoProducuto = Cart(request)
+    carritoProducuto.clear()
+
+    return render(request,'carrito.html')
