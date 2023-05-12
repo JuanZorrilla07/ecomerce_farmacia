@@ -52,7 +52,7 @@ class Pedido(models.Model):
 
 class PedidoDetalle(models.Model):
     pedido = models.ForeignKey(Pedido,on_delete=models.RESTRICT)
-    Producuto = models.ForeignKey(Producuto,on_delete=models.RESTRICT)
+    producuto = models.ForeignKey(Producuto,on_delete=models.RESTRICT)
     cantidad = models.IntegerField(default=1)
     subtotal = models.DecimalField(max_digits=10,decimal_places=2)
 
