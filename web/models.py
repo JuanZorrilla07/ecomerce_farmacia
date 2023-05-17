@@ -20,7 +20,34 @@ class Producuto(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class sucursal(models.Model):
     
+    
+    dirrecion = models.CharField(max_length=50, )
+    telefono = models.CharField(max_length=8)
+    Cerro = 'Cerro'
+    Sayago = 'Sayago'
+    Malvin = 'Malvin'
+    Centro = 'Centro'
+    nombre_choice = [
+        (Cerro,'Cerro'),
+        (Sayago,'Sayago'),
+        (Malvin,'Malvin'),
+        (Centro,'Centro'),
+    ]
+    nombre = models.CharField(
+        max_length=6,
+        choices= nombre_choice,
+        default= Centro,
+    )
+    imagen= models.ImageField(upload_to='productos', blank=True)
+    link= models.CharField(max_length=300, blank=True)
+    horario= models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.nombre  
+
 from django.contrib.auth.models import User
 
 class Cliente(models.Model):
@@ -52,7 +79,7 @@ class Pedido(models.Model):
 
 class PedidoDetalle(models.Model):
     pedido = models.ForeignKey(Pedido,on_delete=models.RESTRICT)
-    producuto = models.ForeignKey(Producuto,on_delete=models.RESTRICT)
+    Producuto = models.ForeignKey(Producuto,on_delete=models.RESTRICT)
     cantidad = models.IntegerField(default=1)
     subtotal = models.DecimalField(max_digits=10,decimal_places=2)
 

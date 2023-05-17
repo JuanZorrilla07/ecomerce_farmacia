@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import Categoria, Producuto, Cliente, Pedido, PedidoDetalle
+from .models import Categoria, Producuto, Cliente, Pedido, PedidoDetalle, sucursal
 from paypal.standard.forms import PayPalPaymentsForm
 
 from django.urls import reverse
@@ -11,6 +11,13 @@ from django.conf import settings
 
 
 # Create your views here.
+#vista de sucursales
+
+def Sucursal(request):
+    sucursales = sucursal.objects.all()
+    return render(request, 'sucursales.html', {'sucursales':sucursales})
+
+
 """vistas  para el catalogo"""
 
 def index(request):
